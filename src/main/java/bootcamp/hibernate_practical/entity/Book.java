@@ -1,18 +1,13 @@
 package bootcamp.hibernate_practical.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Data
 public class Book {
     @Id
@@ -25,11 +20,15 @@ public class Book {
     private int publicationYear;
     private boolean available;
 
+    @Enumerated(EnumType.STRING)
+    private BorrowedStatus borrowedStatus;
+
     public Book(String title, String author, String genre, int publicationYear, boolean available) {
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.publicationYear = publicationYear;
         this.available = available;
+        this.borrowedStatus = BorrowedStatus.AVAILABLE;
     }
 }
